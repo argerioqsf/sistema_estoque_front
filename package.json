@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "babel-plugin-styled-components": "^2.0.6",
     "next": "^12.1.1-canary.10",
     "next-images": "^1.8.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hook-form": "^7.29.0",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "styled-components": "^5.3.3"
@@ -21,6 +23,7 @@
   "devDependencies": {
     "@types/node": "^17.0.21",
     "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.14",
     "@types/styled-components": "^5.1.24",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "eslint": "^8.10.0",

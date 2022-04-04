@@ -44,7 +44,7 @@ export const ContainerLogin = styled.div`
         padding-top: 50px;
         padding-bottom: 50px; */
     `;
-        export const ContentCardLogin = styled.div`
+        export const ContentCardLogin = styled.form`
             display:flex ;
             flex-direction: column;
             justify-content: center;

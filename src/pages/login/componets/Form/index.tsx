@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { UserContext } from '../../../../contexts/UserContext';
+import { LoginFormData } from '../../../../types/user';
 
 import {
     Container,
@@ -19,6 +22,8 @@ import {
 
 function Form() {
 
+    const { loading, loginUser } = useContext(UserContext);
+
     const [ colorBorder, setColorBorder ] = useState([
         {
             label:'email',
@@ -30,7 +35,16 @@ function Form() {
         }
     ]);
 
-    const setarColorBorder = (label: String):any=>{
+    function onSubmit(data: LoginFormData){
+        console.log(data);
+        loginUser(data);
+    }
+
+
+
+    const { register, handleSubmit } = useForm();
+
+    const setarColorBorder = (label: string)=>{
         switch (label) {
             case 'email':
                 colorBorder[0].active = true
@@ -69,26 +83,35 @@ function Form() {
             <DivisorLogin/>
 
             <ContainerCard>
-                <ContentCardLogin>
-
-                    <ContentInput onClick={()=>setarColorBorder('email')} active={colorBorder[0].active}>
-                        <InputLogin
-                            placeholder='Email'
-                        />
-                    </ContentInput>
-
-                    <ContentInput onClick={()=>setarColorBorder('senha')} active={colorBorder[1].active}>
-                        <InputLogin
-                            placeholder='Senha'
-                        />
-                    </ContentInput>
-
-                    <ContainerButtonCard>
-                        <ButtonCard>
-                            ENTRAR
-                        </ButtonCard>
-                    </ContainerButtonCard>
-                </ContentCardLogin>
+                {
+                    !loading &&
+                    (
+                        <ContentCardLogin onSubmit={handleSubmit(onSubmit)}>
+        
+                            <ContentInput onClick={()=>setarColorBorder('email')} active={colorBorder[0].active}>
+                                <InputLogin
+                                    placeholder='Email'
+                                    type="email"
+                                    {...register('email')}
+                                />
+                            </ContentInput>
+        
+                            <ContentInput onClick={()=>setarColorBorder('senha')} active={colorBorder[1].active}>
+                                <InputLogin
+                                    placeholder='Senha'
+                                    type="password"
+                                    {...register('senha')}
+                                />
+                            </ContentInput>
+        
+                            <ContainerButtonCard>
+                                <ButtonCard type='submit'>
+                                    ENTRAR
+                                </ButtonCard>
+                            </ContainerButtonCard>
+                        </ContentCardLogin>
+                    )
+                }
             </ContainerCard>
 
 

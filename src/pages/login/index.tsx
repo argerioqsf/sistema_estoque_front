@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import {
     Form
 } from './componets';
@@ -8,11 +9,11 @@ import {
 } from './styles';
 
 function login() {
-  return (
-      <Container>
-          <Form/>
-      </Container>
-  );
+    return (
+        <Container>
+            <Form/>
+        </Container>
+    );
 }
 
 export default login;
