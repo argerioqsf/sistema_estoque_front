@@ -3,10 +3,6 @@ import { IconContext } from 'react-icons';
 import Navbar from '../Navbar';
 import Sidebar from '../Sidebar';
 
-import {
-    Container
-} from './styles';
-
 const LayoutAdmin: React.FC = ({children}) => {
     const [sidebar, setSidebar] = useState(false);
 
