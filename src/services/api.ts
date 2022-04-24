@@ -1,10 +1,13 @@
 import axios, { AxiosInstance } from 'axios';
+import { parseCookies } from 'nookies';
 const API_URL = 'http://localhost:3333'
 
-const getToken = () => {
-    const token = localStorage.getItem('@SCC/token');
+export const getToken = () => {
+    const {'@SCC/token': token} = parseCookies();
     return token;
 }
+
+export const delay = (amount = 750) => new Promise(resolve => setTimeout(resolve, amount))
 
 export const apiWithToken = ():AxiosInstance => {
     const token = getToken();

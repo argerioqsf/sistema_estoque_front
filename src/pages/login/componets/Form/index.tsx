@@ -35,12 +35,10 @@ function Form() {
         }
     ]);
 
-    function onSubmit(data: LoginFormData){
+    async function onSubmit(data: LoginFormData){
         console.log(data);
-        loginUser(data);
+        await loginUser(data);
     }
-
-
 
     const { register, handleSubmit } = useForm();
 
@@ -84,7 +82,7 @@ function Form() {
 
             <ContainerCard>
                 {
-                    !loading &&
+                    !loading ?
                     (
                         <ContentCardLogin onSubmit={handleSubmit(onSubmit)}>
         
@@ -110,6 +108,9 @@ function Form() {
                                 </ButtonCard>
                             </ContainerButtonCard>
                         </ContentCardLogin>
+                    ):
+                    (
+                        "carregando..."
                     )
                 }
             </ContainerCard>
