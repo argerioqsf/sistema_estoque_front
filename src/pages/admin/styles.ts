@@ -6,7 +6,7 @@ export const Container = styled.div`
     /* padding-top:165px; */
     /* padding: 5px; */
     position: relative;
-    background-color: #2C3A86;
+    /* background-color: #2C3A86; */
     display: flex ;
     flex-direction: row ;
     justify-content:center ;

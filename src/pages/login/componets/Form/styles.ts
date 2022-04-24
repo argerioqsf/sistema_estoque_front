@@ -62,7 +62,7 @@ export const ContainerLogin = styled.div`
                 background-color: #fff0;
                 border: 1px solid ${(props)=>props.active?'#71D98E':'white'};
                 border-radius: 5px;
-                margin-bottom: 25px;
+                margin-top: 25px;
                 /* min-height: 45px; */
                 padding:5px ;
                 /* padding-left: 30px;
@@ -93,6 +93,17 @@ export const ContainerLogin = styled.div`
                     line-height: 22px;
                     color: white;
                 `;
+            
+            export const ContainerErrorForm = styled.div`
+                /* background-color: azure; */
+                width: 40%;
+                /* padding: 5px; */
+                padding-top: 10px;
+                padding-bottom: 10px;
+                min-width: 340px;
+                color: #A52A2A;
+                text-align: center;
+            `;
 
             export const ContainerButtonCard = styled.div`
                 width: 40%;

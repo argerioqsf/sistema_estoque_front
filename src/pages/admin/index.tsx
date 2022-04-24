@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
-import React, { useContext } from 'react';
+import React, { ReactElement, useContext } from 'react';
+import LayoutAdmin from '../../components/LayoutAdmin';
 import { UserContext } from '../../contexts/UserContext';
 
 import {
@@ -30,4 +31,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx)=>{
   return {
     props: {}
   }
+}
+
+Admin.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <LayoutAdmin>
+      {page}
+    </LayoutAdmin>
+  )
 }

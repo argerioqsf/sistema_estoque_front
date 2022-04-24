@@ -11,6 +11,7 @@ type UserContextProps = {
 
 type UserContextType = {
     loading: boolean,
+    errorText: string,
     setLoading: (newState: boolean) => void,
     loginUser: (data: LoginFormData) => void,
     user: User,
@@ -21,6 +22,7 @@ export const UserContext = createContext<UserContextType>({} as UserContextType)
 
 export const UserContextProvider = ({children}:UserContextProps)=>{
     const [ loading, setLoading ] = useState(false);
+    const [ errorText, setErrorText ] = useState("");
     const [ user, setUser ] = useState<User | null>(null);
     const [ isAuthenticated, setIsAuthenticated ] = useState(!!user);
 
@@ -49,15 +51,22 @@ export const UserContextProvider = ({children}:UserContextProps)=>{
             });
             setUser(user);
             setLoading(false);
+            setErrorText("");
             Router.push('/admin');
         } catch (error) {
-            console.log(error.message);
+            if (error.response) {
+                setErrorText(error.response?.data?.message!!);
+                // console.log("erro request: ",error.response.data.message);
+            } else {
+                setErrorText(error.message!!);
+                // console.log("erro general: ", error.message);
+            }
             setLoading(false);
         }
     }
 
     return (
-        <UserContext.Provider value={{loading, setLoading, loginUser, user, isAuthenticated}}>
+        <UserContext.Provider value={{loading, errorText, setLoading, loginUser, user, isAuthenticated}}>
             {children}
         </UserContext.Provider>
     )

@@ -10,6 +10,7 @@ import {
         ContentCardLogin,
             ContentInput,
                 InputLogin,
+            ContainerErrorForm,
             ContainerButtonCard,
                 ButtonCard,
     DivisorLogin,
@@ -22,7 +23,7 @@ import {
 
 function Form() {
 
-    const { loading, loginUser } = useContext(UserContext);
+    const { loading, loginUser, errorText } = useContext(UserContext);
 
     const [ colorBorder, setColorBorder ] = useState([
         {
@@ -101,6 +102,10 @@ function Form() {
                                     {...register('senha')}
                                 />
                             </ContentInput>
+
+                            <ContainerErrorForm>
+                                {errorText.length > 0&&errorText}
+                            </ContainerErrorForm>
         
                             <ContainerButtonCard>
                                 <ButtonCard type='submit'>
