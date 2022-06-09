@@ -17,21 +17,21 @@ export default function Admin() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx)=>{
-  const {['@SCC/token']:token} = parseCookies(ctx);
+// export const getServerSideProps: GetServerSideProps = async (ctx)=>{
+//   const {['@SCC/token']:token} = parseCookies(ctx);
 
-  if (!token) {
-    return {
-      redirect:{
-        destination: '/login',
-        permanent: false
-      }
-    }
-  }
-  return {
-    props: {}
-  }
-}
+//   if (!token) {
+//     return {
+//       redirect:{
+//         destination: '/login',
+//         permanent: false
+//       }
+//     }
+//   }
+//   return {
+//     props: {}
+//   }
+// }
 
 Admin.getLayout = function getLayout(page: ReactElement) {
   return (
