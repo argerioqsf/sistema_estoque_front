@@ -33,25 +33,18 @@ export const UserContextProvider = ({children}:UserContextProps)=>{
                 router.push('/login')
                 destroyToken()
             }
-            // yield put(actions.setStatus(error.response.status));
-            // yield put(actions.setError(error.response.data.message));
-            // yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
         } else if (error.request) {
             console.log('error request: ',error.request);
             if(error.request.status == 401){
                 router.push('/login')
                 destroyToken()
             }
-            // yield put(actions.setStatus(error.request.status));
-            // yield put(actions.setError({ data: error.message }));
-            // yield put(setErrorGeneral(error.message,true,error.request.status));
         } else {
             console.log('error desc: ',error.message);
             if(error.status == 401){
                 router.push('/login')
                 destroyToken()
             }
-            // yield put(actions.setError({ data: error.message }));
         }
     }
 
@@ -93,10 +86,8 @@ export const UserContextProvider = ({children}:UserContextProps)=>{
         } catch (error) {
             if (error.response) {
                 setErrorText(error.response?.data?.message!!);
-                // console.log("erro request: ",error.response.data.message);
             } else {
                 setErrorText(error.message!!);
-                // console.log("erro general: ", error.message);
             }
             setLoading(false);
         }

@@ -6,7 +6,6 @@ export function middleware(req:NextRequest, ev:NextFetchEvent){
     const { pathname } = req.nextUrl
     if( pathname == '/admin' ){
         const {['@SCC/token']:token} = req.cookies;
-        console.log("middleware-admin")
         //const router = useRouter()
         console.log("token", token)
         if (!token) {
@@ -18,7 +17,6 @@ export function middleware(req:NextRequest, ev:NextFetchEvent){
 
     if( pathname == '/login' ){
         const {['@SCC/token']:token} = req.cookies;
-        console.log("middleware-admin")
         //const router = useRouter()
         console.log("token", token)
         if (token) {
