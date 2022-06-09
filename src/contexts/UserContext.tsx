@@ -1,4 +1,4 @@
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { setCookie } from "nookies";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { getToken } from "../services/api";
@@ -25,14 +25,23 @@ export const UserContextProvider = ({children}:UserContextProps)=>{
     const [ errorText, setErrorText ] = useState("");
     const [ user, setUser ] = useState<User | null>(null);
     const [ isAuthenticated, setIsAuthenticated ] = useState(!!user);
+    const router = useRouter()
+    const loadUser = async () => {
+        try {
+            const return_user = await getUserService()
+            setUser(return_user.data.user);
+            console.log("foi")
+        } catch (error) {
+            //router.push('/usuario/login')
+            console.log("não foi")
+        }
+    }
 
     useEffect(()=>{
         const token = getToken();
 
         if (token) {
-            getUserService().then(response=>{
-                setUser(response.data.user);
-            });
+            loadUser();
         }
     },[]);
 
