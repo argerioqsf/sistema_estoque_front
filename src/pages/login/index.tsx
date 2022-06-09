@@ -17,19 +17,3 @@ export default function login() {
         </Container>
     );
 }
-
-export const getServerSideProps: GetServerSideProps = async (ctx)=>{
-  const {['@SCC/token']:token} = parseCookies(ctx);
-
-  if (token) {
-    return {
-      redirect:{
-        destination: '/admin',
-        permanent: false
-      }
-    }
-  }
-  return {
-    props: {}
-  }
-}
