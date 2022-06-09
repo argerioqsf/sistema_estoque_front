@@ -1,7 +1,7 @@
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { setCookie } from "nookies";
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { getToken } from "../services/api";
+import { destroyToken, getToken } from "../services/api";
 import { getUserService, loginUserService } from "../services/userServices";
 import { LoginFormData, User } from "../types/user";
 
@@ -25,14 +25,51 @@ export const UserContextProvider = ({children}:UserContextProps)=>{
     const [ errorText, setErrorText ] = useState("");
     const [ user, setUser ] = useState<User | null>(null);
     const [ isAuthenticated, setIsAuthenticated ] = useState(!!user);
+    const router = useRouter();
+    const tratarError = (error) => {
+        if (error.response) {
+            console.log('error response: ',error.response);
+            if(error.response.status == 401){
+                router.push('/login')
+                destroyToken()
+            }
+            // yield put(actions.setStatus(error.response.status));
+            // yield put(actions.setError(error.response.data.message));
+            // yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
+        } else if (error.request) {
+            console.log('error request: ',error.request);
+            if(error.request.status == 401){
+                router.push('/login')
+                destroyToken()
+            }
+            // yield put(actions.setStatus(error.request.status));
+            // yield put(actions.setError({ data: error.message }));
+            // yield put(setErrorGeneral(error.message,true,error.request.status));
+        } else {
+            console.log('error desc: ',error.message);
+            if(error.status == 401){
+                router.push('/login')
+                destroyToken()
+            }
+            // yield put(actions.setError({ data: error.message }));
+        }
+    }
+
+    const loadUser = async () =>{
+        try {
+            const response = await getUserService()
+            setUser(response.data.user);
+        } catch (error) {
+            console.log("deu erro")
+            tratarError(error)
+        }
+    }    
 
     useEffect(()=>{
         const token = getToken();
 
         if (token) {
-            getUserService().then(response=>{
-                setUser(response.data.user);
-            });
+            loadUser()
         }
     },[]);
 
